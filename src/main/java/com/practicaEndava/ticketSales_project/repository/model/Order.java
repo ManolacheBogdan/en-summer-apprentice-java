@@ -99,4 +99,9 @@ public class Order {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+
+    public int getTicketCategoryID() {
+        return 0;
+    }
 }

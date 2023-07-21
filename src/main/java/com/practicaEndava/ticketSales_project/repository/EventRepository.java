@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends CrudRepository<Event, Integer> {
-    @Query("SELECT e from Event e left join EventType t where e.location=?1 and t.eventTypeName=?2")
+    @Query("SELECT e from Event e left join EventType t on e.eventType=t left join Location l on e.location=l where l.locationID=?1 and t.eventTypeName=?2")
     List<Event> findAllByLocationAndByEventType(int locationID, String eventTypeName);
 
     List<Event> findAll();

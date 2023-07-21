@@ -16,14 +16,13 @@ public class OrderController {
 
     @GetMapping()
     @ResponseBody
-    public List<Order> getOrders(
-                               /* @RequestParam("eventId") int eventId,
-                                @RequestParam("timestamp") String orderedAt,
-                                @RequestParam("ticketCategoryId") int ticketCategoryId,
-                                @RequestParam("numberOfTickets") int numberOfTickets,
-                                @RequestParam("totalPrice") double totalPrice*/
-    ){
+    public List<Order> getOrders() {
         return orderService.getOrders();
     }
 
+    @PostMapping
+    public void createOrder(@RequestBody Order orders) {
+        orderService.createOrders(orders);
+
+    }
 }

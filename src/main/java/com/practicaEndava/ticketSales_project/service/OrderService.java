@@ -17,5 +17,13 @@ public class OrderService implements IOrderService {
     public List<Order> getOrders(){
         List<Order> orders = orderRepository.findAll();
         return orders;
+
     }
+    @Override
+    public void createOrders (Order orders){
+        orderRepository.save(orders);
+    }
+
+
+
 }

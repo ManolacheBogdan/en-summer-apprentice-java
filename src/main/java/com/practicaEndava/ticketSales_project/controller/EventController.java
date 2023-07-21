@@ -13,10 +13,12 @@ public class EventController {
     @Autowired
     private EventService eventsService;
 
-
-    @GetMapping("/event/{resource}/{resource2}")
+    public EventController(EventService eventsService) {
+        this.eventsService = eventsService;
+    }
+    @GetMapping("/event")
     @ResponseBody
-    public List<Event> getEvents(@RequestParam("12") int resource, @RequestParam("Sport") String resource2){
-        return eventsService.getEventsByLocationIDAndEventType(resource, resource2) ;
+    public List<Event> getEvents(@RequestParam int locationID, @RequestParam String eventType){
+        return eventsService.getEventsByLocationIDAndEventType(locationID, eventType) ;
     }
 }

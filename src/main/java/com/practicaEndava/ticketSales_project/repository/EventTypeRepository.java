@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface EventTypeRepository extends CrudRepository<EventType, Integer> {
     List<EventType> findAll();
+    EventType getEventTypeByEventTypeName(String name);
 }

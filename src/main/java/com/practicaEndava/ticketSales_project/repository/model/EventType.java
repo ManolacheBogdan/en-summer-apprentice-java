@@ -18,7 +18,6 @@ public class EventType {
     @Column(name = "eventTypeName")
     private String eventTypeName;
 
-
     public EventType() {
 
     }

@@ -1,13 +1,12 @@
 package com.practicaEndava.ticketSales_project.controller;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.practicaEndava.ticketSales_project.repository.model.Customer;
 import com.practicaEndava.ticketSales_project.repository.model.TicketCategory;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@JsonSerialize
-
+@Component
 public class OrderDTO {
     private int orderID;
 

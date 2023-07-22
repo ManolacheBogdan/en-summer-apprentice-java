@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/order")
-public class OrderController {
+public class OrderController{
 
     @Autowired
     private OrderService orderService;
-    @Autowired
+    @Autowired(required=true)
     private OrderDTO orderDTO;
     @GetMapping()
     @ResponseBody

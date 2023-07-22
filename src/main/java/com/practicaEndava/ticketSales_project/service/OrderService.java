@@ -4,6 +4,7 @@ import com.practicaEndava.ticketSales_project.repository.OrderRepository;
 import com.practicaEndava.ticketSales_project.repository.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.practicaEndava.ticketSales_project.controller.OrderDTO;
 
 import java.util.List;
 

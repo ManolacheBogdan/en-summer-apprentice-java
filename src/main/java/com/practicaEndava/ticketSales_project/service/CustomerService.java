@@ -18,5 +18,25 @@ public class CustomerService implements ICustomerService{
         return customer;
     }
 
+    /**
+     * @param customer
+     */
+    @Override
+    public void createCustomer(Customer customer) {
+        customerRepository.save(customer);
+
+    }
+
+    @Override
+    public void updateCustomer(Integer customerID, Customer customer) {
+        Customer customerToUpdate=customerRepository.findById(customerID).orElseThrow(
+                ()-> new IllegalStateException(String.format("Customer with ID %s doesn't exist",customerID))) ;
+        customerToUpdate.setCustomerName(customer.getCustomerName());
+        customerToUpdate.setEmail(customer.getEmail());
+
+        customerRepository.save(customerToUpdate);
+    }
+
+
 
 }

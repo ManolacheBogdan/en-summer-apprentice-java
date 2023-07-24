@@ -11,11 +11,14 @@ public class OrderController{
 
     @Autowired
     private OrderService orderService;
+    public OrderController(OrderService ordersService) {
+        this.orderService = ordersService;
+    }
     @Autowired(required=true)
     private OrderDTO orderDTO;
     @GetMapping()
     @ResponseBody
-    public List<Order> getOrders() {
+    public List<OrderDTO> getOrders() {
         return orderService.getOrders();
     }
 

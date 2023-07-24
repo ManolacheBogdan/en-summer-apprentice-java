@@ -2,11 +2,13 @@ package com.practicaEndava.ticketSales_project.repository.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name="orders")
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderID")
@@ -101,7 +103,29 @@ public class Order {
     }
 
 
-    public int getTicketCategoryID() {
-        return 0;
+
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderID=" + orderID +
+                ", ticketCategory=" + ticket_category +
+                ", customer=" + customerID +
+                ", orderedAt=" + OrderedAt +
+                ", numberOfTickets=" + NumberOfTickets +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return NumberOfTickets == order.NumberOfTickets && totalPrice == order.totalPrice && Objects.equals(orderID, order.orderID) && Objects.equals(ticket_category, order.ticket_category) && Objects.equals(customerID, orderID) && Objects.equals(OrderedAt, order.OrderedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderID, ticket_category, customerID, OrderedAt, NumberOfTickets, totalPrice);
     }
 }

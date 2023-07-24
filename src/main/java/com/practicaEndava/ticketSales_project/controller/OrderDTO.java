@@ -4,11 +4,13 @@ import com.practicaEndava.ticketSales_project.repository.model.Customer;
 import com.practicaEndava.ticketSales_project.repository.model.TicketCategory;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
-public class OrderDTO {
-    private int orderID;
+public class OrderDTO implements Serializable {
+    private int eventID;
 
 
     private int customerID;
@@ -28,12 +30,15 @@ public class OrderDTO {
 
     }
 
-    public int getOrderID() {
-        return orderID;
+    public OrderDTO(int eventID, LocalDateTime orderedAt, int ticketCategoryID, int numberOfTickets, double totalPrice) {
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public int getEventID() {
+        return eventID;
+    }
+
+    public void setOrderID(int eventID) {
+        this.eventID = eventID;
     }
 
 
@@ -78,12 +83,17 @@ public class OrderDTO {
         this.totalPrice = totalPrice;
     }
 
-    public OrderDTO(int orderID, Customer customerID, TicketCategory ticketCategoryID,
-                    int NumberOfTickets, LocalDateTime OrderedAt, double totalPrice) {
-        this.orderID = orderID;
-        this.NumberOfTickets = NumberOfTickets;
-        this.ticketCategoryID= ticketCategoryID.getTicketCategoryID();
+    /*public record OrderDTO(int eventID,
+                           LocalDate orderedAt,
+                           TicketCategory ticketCategoryID,
+                           int NumberOfTickets,
+                           double totalPrice) implements Serializable {}*/
+
+    public OrderDTO(int eventID, LocalDateTime OrderedAt, TicketCategory ticketCategoryID, int NumberOfTickets, double totalPrice) {
+        this.eventID = eventID;
         this.OrderedAt = OrderedAt;
+        this.ticketCategoryID = ticketCategoryID.getTicketCategoryID();
+        this.NumberOfTickets = NumberOfTickets;
         this.totalPrice = totalPrice;
     }
 }

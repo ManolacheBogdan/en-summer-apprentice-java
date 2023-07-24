@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.practicaEndava.ticketSales_project.controller.OrderDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService implements IOrderService {
@@ -15,9 +16,14 @@ public class OrderService implements IOrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public List<Order> getOrders(){
-        List<Order> orders = orderRepository.findAll();
-        return orders;
+    public List<OrderDTO> getOrders(){
+        return orderRepository.findAll().stream().map(orders -> new OrderDTO(
+           orders.getTicket_category().getEventID().getEventID(),
+           orders.getOrderedAt(),
+           orders.getTicket_category().getTicketCategoryID(),
+           orders.getNumberOfTickets(),
+           orders.getTotalPrice()
+        )).collect(Collectors.toList());
 
     }
     @Override

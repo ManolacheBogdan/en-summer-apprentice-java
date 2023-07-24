@@ -6,7 +6,7 @@ import com.practicaEndava.ticketSales_project.repository.model.Order;
 import java.util.List;
 
 public interface IOrderService {
-    List<Order> getOrders();
+    List<OrderDTO> getOrders();
 
     void createOrders(Order orders);
 }

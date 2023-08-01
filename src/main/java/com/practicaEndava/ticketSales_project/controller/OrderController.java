@@ -1,40 +1,31 @@
 package com.practicaEndava.ticketSales_project.controller;
 
-import com.practicaEndava.ticketSales_project.repository.model.Order;
+import com.practicaEndava.ticketSales_project.DTO.CreateOrderDto;
+import com.practicaEndava.ticketSales_project.DTO.OrderDTO;
 import com.practicaEndava.ticketSales_project.service.OrderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 @RestController
-@RequestMapping("/order")
-public class OrderController{
+@RequiredArgsConstructor
+@RequestMapping("/orders")
+public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
-    public OrderController(OrderService ordersService) {
-        this.orderService = ordersService;
-    }
-    @Autowired(required=true)
-    private OrderDTO orderDTO;
-    @GetMapping()
-    @ResponseBody
-    public List<OrderDTO> getOrders() {
-        return orderService.getOrders();
+    private final OrderService orderService;
+
+    @GetMapping
+    private ResponseEntity<List<OrderDTO>> getAll(){
+        return new ResponseEntity<>(orderService.getAllOrders(),HttpStatus.OK);
     }
 
-    @PostMapping
-    public void createOrder(@RequestBody Order orderDTO) {
-        orderService.createOrders(orderDTO);
-
+    @PostMapping()
+    public ResponseEntity<OrderDTO> create(@RequestBody CreateOrderDto createOrderDto) {
+        return new ResponseEntity<>(orderService.createOrder(createOrderDto), HttpStatus.CREATED);
     }
-    public OrderDTO convertToOrder(Order order) {
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setOrderID(order.getOrderID());
-        orderDTO.setOrderedAt(order.getOrderedAt());
-        //orderDTO.setTicket_category(order.getTicketCategoryID());
-        orderDTO.setNumberOfTickets(order.getNumberOfTickets());
-        orderDTO.setTotalPrice(order.getTotalPrice());
 
-        return orderDTO;
-    }
 }

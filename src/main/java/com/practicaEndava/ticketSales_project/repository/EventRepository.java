@@ -1,18 +1,16 @@
 package com.practicaEndava.ticketSales_project.repository;
 
-import com.practicaEndava.ticketSales_project.repository.model.Event;
+import com.practicaEndava.ticketSales_project.model.Event;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface EventRepository extends CrudRepository<Event, Integer> {
-    @Query("SELECT e from Event e left join EventType t on e.eventType=t left join Location l on e.location=l where l.locationID=?1 and t.eventTypeName=?2")
-    List<Event> findAllByLocationAndByEventType(int locationID, String eventTypeName);
-
-    List<Event> findAll();
+public interface EventRepository extends JpaRepository<Event, Integer> {
+    List<Event> findEventsByLocationLocationIDAndEventTypeEventTypeName(@Param("locationID") int locationId, @Param("eventTypeName") String eventTypeName);
 
 }
 

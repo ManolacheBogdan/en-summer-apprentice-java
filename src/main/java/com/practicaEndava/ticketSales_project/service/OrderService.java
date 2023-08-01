@@ -1,36 +1,56 @@
 package com.practicaEndava.ticketSales_project.service;
 
+import com.practicaEndava.ticketSales_project.DTO.CreateOrderDto;
+import com.practicaEndava.ticketSales_project.DTO.OrderDTO;
+import com.practicaEndava.ticketSales_project.mapper.CreateOrderDtoTransferMapper;
+import com.practicaEndava.ticketSales_project.mapper.OrderToOrderDTOMapper;
+import com.practicaEndava.ticketSales_project.model.Customer;
+import com.practicaEndava.ticketSales_project.model.Order;
+import com.practicaEndava.ticketSales_project.model.TicketCategory;
+import com.practicaEndava.ticketSales_project.repository.CustomerRepository;
 import com.practicaEndava.ticketSales_project.repository.OrderRepository;
-import com.practicaEndava.ticketSales_project.repository.model.Order;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.practicaEndava.ticketSales_project.repository.TicketCategoryRepository;
+import com.practicaEndava.ticketSales_project.service.Interfaces.IOrderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.practicaEndava.ticketSales_project.controller.OrderDTO;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService implements IOrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final CustomerRepository customerRepository;
+    private final TicketCategoryRepository ticketCategoryRepository;
 
     @Override
-    public List<OrderDTO> getOrders(){
-        return orderRepository.findAll().stream().map(orders -> new OrderDTO(
-           orders.getTicket_category().getEventID().getEventID(),
-           orders.getOrderedAt(),
-           orders.getTicket_category().getTicketCategoryID(),
-           orders.getNumberOfTickets(),
-           orders.getTotalPrice()
-        )).collect(Collectors.toList());
-
-    }
-    @Override
-    public void createOrders (Order orders){
-        orderRepository.save(orders);
+    public List<OrderDTO> getAllOrders() {
+        List<OrderDTO> orderList = new ArrayList<OrderDTO>();
+        orderRepository.findAll().forEach(order -> orderList.add(OrderToOrderDTOMapper.toDto(order)));
+        return orderList;
     }
 
 
+    @Override
+    public OrderDTO createOrder(CreateOrderDto createOrderDto) {
+        //Get the customer if it exists
+        Optional<Customer> customer=customerRepository.findById(createOrderDto.getCustomerId());
+        if (!customer.isPresent()) {
 
+            throw new RuntimeException("Customer not found");
+        }
+        //Get ticket category
+        Optional<TicketCategory> ticketCategory=ticketCategoryRepository.findById(createOrderDto.getTicketCategoryID());
+        if (!ticketCategory.isPresent()) {
+
+            throw new RuntimeException("Ticket Category not found");
+        }
+
+        Order order= CreateOrderDtoTransferMapper.toEntity(createOrderDto,customer.get(),ticketCategory.get());
+        return OrderToOrderDTOMapper.toDto(orderRepository.save(order));
+    }
 }

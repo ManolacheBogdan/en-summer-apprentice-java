@@ -42,6 +42,61 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>de.monochromata.contract</groupId>
+            <artifactId>java-contract</artifactId>
+            <version>18.4.6</version>
+        </dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.monochromata.contract</groupId>
+			<artifactId>java-contract</artifactId>
+			<version>18.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sebhoss.contract</groupId>
+			<artifactId>contract-juel</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sebhoss.contract</groupId>
+			<artifactId>contract-juel</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sebhoss.contract</groupId>
+			<artifactId>contract-juel</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 	</dependencies>
 

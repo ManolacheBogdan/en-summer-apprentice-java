@@ -7,8 +7,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class TicketSalesProjectApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context =SpringApplication.run(TicketSalesProjectApplication.class, args);
-	}
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(TicketSalesProjectApplication.class, args);
+    }
 
 }

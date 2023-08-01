@@ -1,24 +1,25 @@
 package com.practicaEndava.ticketSales_project.controller;
 
-import com.practicaEndava.ticketSales_project.repository.model.Event;
+import com.practicaEndava.ticketSales_project.DTO.EventDto;
+import com.practicaEndava.ticketSales_project.model.Event;
 import com.practicaEndava.ticketSales_project.service.EventService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequiredArgsConstructor
+@RequestMapping("/events")
 public class EventController {
-    @Autowired
-    private EventService eventsService;
 
-    public EventController(EventService eventsService) {
-        this.eventsService = eventsService;
-    }
-    @GetMapping("/event")
-    @ResponseBody
-    public List<Event> getEvents(@RequestParam int locationID, @RequestParam String eventType){
-        return eventsService.getEventsByLocationIDAndEventType(locationID, eventType) ;
+    private final  EventService eventsService;
+
+    @GetMapping()
+    public ResponseEntity<List<EventDto>> getByEventTypeNameAndLocationId(@RequestParam String eventTypeName, @RequestParam int locationID) {
+        return new ResponseEntity<>(eventsService.getByEventTypeNameAndLocationId(eventTypeName, locationID), HttpStatus.OK);
     }
 }

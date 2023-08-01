@@ -1,12 +1,9 @@
 package com.practicaEndava.ticketSales_project.repository;
 
-import com.practicaEndava.ticketSales_project.repository.model.Order;
-import org.springframework.data.repository.CrudRepository;
+import com.practicaEndava.ticketSales_project.model.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface OrderRepository extends CrudRepository<Order, Integer> {
-    List<Order> findAll();
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 }

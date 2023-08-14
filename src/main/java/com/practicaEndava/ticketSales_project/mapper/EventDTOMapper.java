@@ -17,7 +17,7 @@ public class EventDTOMapper {
         eventDto.setName(event.getName());
         eventDto.setDescription(event.getDescription());
         eventDto.setStartDate(event.getStartDate());
-        eventDto.setEndDate(event.getStartDate());
+        eventDto.setEndDate(event.getEndDate());
         eventDto.setEventTypeName(eventTypeName);
         eventDto.setLocation(locationDto);
         eventDto.setTicketCategories(ticketCategoryDtoList);

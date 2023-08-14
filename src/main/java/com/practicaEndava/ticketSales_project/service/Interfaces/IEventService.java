@@ -7,5 +7,7 @@ import java.util.List;
 
 
 public interface IEventService {
+
+     List<EventDto> getAllEvents();
      List<EventDto> getByEventTypeNameAndLocationId(String eventTypeName, int locationID);
 }

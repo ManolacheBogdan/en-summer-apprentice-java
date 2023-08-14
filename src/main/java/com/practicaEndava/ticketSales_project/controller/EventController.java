@@ -18,6 +18,11 @@ public class EventController {
 
     private final  EventService eventsService;
 
+    @GetMapping(value="/all")
+    public ResponseEntity<List<EventDto>> getAllEvents() {
+        List<EventDto> allEvents = eventsService.getAllEvents();
+        return new ResponseEntity<>(allEvents, HttpStatus.OK);
+    }
     @GetMapping()
     public ResponseEntity<List<EventDto>> getByEventTypeNameAndLocationId(@RequestParam String eventTypeName, @RequestParam int locationID) {
         return new ResponseEntity<>(eventsService.getByEventTypeNameAndLocationId(eventTypeName, locationID), HttpStatus.OK);

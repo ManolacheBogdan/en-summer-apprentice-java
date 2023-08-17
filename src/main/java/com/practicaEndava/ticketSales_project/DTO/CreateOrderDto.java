@@ -9,5 +9,5 @@ public class CreateOrderDto {
     private int ticketCategoryID;
     private int noOfTickets;
     private int customerId;
-    private int eventId;
+    private int eventID;
 }

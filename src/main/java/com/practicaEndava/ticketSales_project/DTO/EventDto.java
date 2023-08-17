@@ -1,6 +1,5 @@
 package com.practicaEndava.ticketSales_project.DTO;
 
-import com.practicaEndava.ticketSales_project.model.Location;
 import lombok.Data;
 
 import java.time.LocalDateTime;

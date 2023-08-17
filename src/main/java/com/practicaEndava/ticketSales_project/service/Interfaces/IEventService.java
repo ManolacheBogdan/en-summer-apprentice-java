@@ -10,4 +10,10 @@ public interface IEventService {
 
      List<EventDto> getAllEvents();
      List<EventDto> getByEventTypeNameAndLocationId(String eventTypeName, int locationID);
+
+     List<String> getAllLocationNames();
+     List<String> getAllEventTypeNames();
+
+     List<EventDto> getByEventTypeNameAndLocationName(String eventTypeName, String locationName);
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public interface IOrderService {
 
-    List<OrderDTO> getAllOrders();
+    List<OrderDTO> getAll();
 
     OrderDTO createOrder(CreateOrderDto createOrderDto);
 }

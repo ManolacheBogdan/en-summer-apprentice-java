@@ -12,6 +12,7 @@ import com.practicaEndava.ticketSales_project.model.Location;
 import com.practicaEndava.ticketSales_project.model.TicketCategory;
 import com.practicaEndava.ticketSales_project.repository.EventRepository;
 import com.practicaEndava.ticketSales_project.repository.EventTypeRepository;
+import com.practicaEndava.ticketSales_project.repository.LocationRepository;
 import com.practicaEndava.ticketSales_project.service.Interfaces.IEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class EventService implements IEventService {
 
     private final EventRepository eventRepository;
     private final EventTypeRepository eventTypeRepository;
+    private final LocationRepository locationRepository;
 
     public List<EventDto> getAllEvents() {
         List<Event> events = eventRepository.findAll();
@@ -59,6 +61,33 @@ public class EventService implements IEventService {
             }
             eventDTOList.add(EventDTOMapper.toDto(event,eventType.get().getEventTypeName(), LocationDtoTransferMapper.toDto(event.getLocation()),ticketCategoryDTOS));
 
+        }
+        return eventDTOList;
+    }
+
+    @Override
+    public List<String> getAllLocationNames() {
+        return eventRepository.findAllLocationNames();
+    }
+
+    @Override
+    public List<String> getAllEventTypeNames() {
+        return eventRepository.findAllEventTypeNames();
+    }
+
+    public List<EventDto> getByEventTypeNameAndLocationName(String eventTypeName, String locationName) {
+        List<Event> eventList = eventRepository.findEventsByLocationLocationNameAndEventTypeEventTypeName(locationName, eventTypeName);
+        List<EventDto> eventDTOList = new ArrayList<>();
+        for (Event event : eventList) {
+            List<TicketCategoryDTO> ticketCategoryDTOS = new ArrayList<>();
+            for (TicketCategory ticketCategory : event.getTicketCategories()) {
+                ticketCategoryDTOS.add(TicketCategoryToTicketCategoryDTOMapper.toDto(ticketCategory));
+            }
+            Optional<EventType> eventType = eventTypeRepository.findById(event.getEventType().getEventTypeID());
+            if (eventType.isEmpty()) {
+                throw new RuntimeException("Could not find event type: " + event.getEventType().getEventTypeID());
+            }
+            eventDTOList.add(EventDTOMapper.toDto(event, eventType.get().getEventTypeName(), LocationDtoTransferMapper.toDto(event.getLocation()), ticketCategoryDTOS));
         }
         return eventDTOList;
     }

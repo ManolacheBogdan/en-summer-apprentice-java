@@ -18,9 +18,9 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping
+    @GetMapping(value ="/all")
     private ResponseEntity<List<OrderDTO>> getAll(){
-        return new ResponseEntity<>(orderService.getAllOrders(),HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getAll(),HttpStatus.OK);
     }
 
     @PostMapping()

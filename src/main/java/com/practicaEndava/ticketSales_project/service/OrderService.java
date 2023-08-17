@@ -28,7 +28,7 @@ public class OrderService implements IOrderService {
     private final TicketCategoryRepository ticketCategoryRepository;
 
     @Override
-    public List<OrderDTO> getAllOrders() {
+    public List<OrderDTO> getAll() {
         List<OrderDTO> orderList = new ArrayList<OrderDTO>();
         orderRepository.findAll().forEach(order -> orderList.add(OrderToOrderDTOMapper.toDto(order)));
         return orderList;

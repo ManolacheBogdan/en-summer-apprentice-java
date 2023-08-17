@@ -18,6 +18,7 @@ public class TicketCategoryToTicketCategoryDTOMapper {
         ticketCategoryDTO.setTicketCategoryID(ticketCategory.getTicketCategoryID());
         ticketCategoryDTO.setTicketDescription(ticketCategory.getTicketDescription());
         ticketCategoryDTO.setPrice(ticketCategory.getPrice());
+        ticketCategoryDTO.setEventID(ticketCategory.getEvent().getEventID());
         return ticketCategoryDTO;
     }
 }
